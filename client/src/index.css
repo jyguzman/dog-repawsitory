@@ -1,0 +1,106 @@
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+ 	-moz-osx-font-smoothing: grayscale;
+
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	max-width: 50%;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.header {
+	display: flex;
+	padding-top: 5%;
+	border: blue solid 2px;
+	border-radius: 10px;
+	margin: 5px;
+	padding: 0;
+}
+
+.header h1 {
+	margin: auto;
+	padding: 10px;
+	display: table-cell;
+	vertical-align: middle;
+	justify-content: center;
+	text-align: center;
+}
+
+.header img {
+	padding: 00px;
+	border-radius: 10px;
+}
+
+.search-bar {
+	padding-top: 10px;
+	justify-content: center;
+	width: 100%;
+	position: relative;
+	display: flex;
+}
+
+.search-imgs {
+	text-align: center;
+}
+
+.dogs {
+	margin: auto;
+	justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	background-color: white;
+}
+
+.dog-modal {
+	flex: 0 0 25%;
+	display: inline-block;
+}
+
+.dogs img {
+	border-radius: 20px;
+	height: 175px;
+	width: 175px;
+	padding: 10px;
+	padding-top: 15px;
+	border-color: black;
+	display: table-cell;
+}
+
+.dog {
+	cursor: pointer;
+}
+
+.dog-img {
+	border-radius: 10px;
+	height: 500px;
+	width: 500px;
+}
+
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
