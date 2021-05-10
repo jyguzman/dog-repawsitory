@@ -47,7 +47,7 @@ export default function ModalImage( {url, title}) {
       >
         <Fade in={open}>
             <div className={classes.paper}>
-              <img height="250" width="250px" src={url} alt={title} />
+              <img src={url} alt={title} />
             </div>
         </Fade>
       </Modal>
