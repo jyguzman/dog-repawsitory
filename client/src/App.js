@@ -4,26 +4,30 @@ import './App.css';
 import Header from './components/Header';
 import GalleryList from './components/GalleryList';
 import BreedList from './components/BreedList';
+import MostSearched from './components/MostSearched';
+import Nav from './components/Nav';
+import Grow from '@material-ui/core/Grow';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDog } from '@fortawesome/free-solid-svg-icons'
 
 function App() {
   let [dogs, setDogs] = useState([]);
   let [breedsList, setBreedsList] = useState([]);
-  let [page, setPage] = useState(1);
+  let [topTen, setTopTen] = useState([]);
+  const [imgs, setImgs] = useState([]);
+  let [hiddenPopular, hidePopular] = useState(true);
+  let [hiddenGallery, hideGallery] = useState(true);
 
   let submitHandler = (event, searchTerm) => {
     event.preventDefault();
-
     axios.post("/images", {"breed":searchTerm})
     .then(response => {
       if (response.data.message.length > 0) {
         setDogs(response.data.message);
+        hideGallery(false);
+        hidePopular(true);
       } else {
         setDogs([]);
       }
-      setPage(1);
     })
     .catch(() => setDogs([]));
   };
@@ -36,24 +40,24 @@ function App() {
     .catch(() => setBreedsList([]));
   };
 
+  let getTopTen = () => {
+    axios.get("/top")
+    .then(response => {
+      setTopTen(response.data);
+    })
+    .catch(console.err);
+  }
+
+  let mostPopularHandler = e => {
+    e.preventDefault();
+    getTopTen();
+    hidePopular(false);
+    hideGallery(true);
+  };
+
   useEffect(() => {
     getBreedList();
   }, []);
-  //console.log(breedsList);
-  /*let submitHandlerWioutNode = (e, searchTerm) => {
-    e.preventDefault();
-    if(!hasSearched) setHasSearched(true);
-
-    let url =  
-      "https://dog.ceo/api/breed/" + searchTerm.toLowerCase() 
-      + "/images";
-
-    axios.get(url)
-    .then(response => {
-      setDogs(response.data.message);
-    })
-    .catch(() => setDogs([]));
-  };*/
 
   return (
     <div className="app">
@@ -65,9 +69,11 @@ function App() {
           submitHandler={(event, searchTerm) => 
           { if(searchTerm != null) submitHandler(event, searchTerm.breed)}}/>
         </div>
+        <Nav mostPopularHandler={e => mostPopularHandler(e)} />
       </div>
       
-      <GalleryList data={dogs}/>
+      <MostSearched topTen={topTen} imgs={imgs} hidden={hiddenPopular}/>
+      <GalleryList data={dogs} hidden={hiddenGallery} />
     </div>
       
   );

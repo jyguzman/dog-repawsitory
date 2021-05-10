@@ -2,14 +2,6 @@ import React from 'react';
 import Image from "./Image";
 import ModalImage from './ModalImage';
 
-/** else {
-		return (
-			<div className="search-imgs">
-				<h1>Search for an image!</h1>
-			</div>
-		);
-	}*/
-
 const Gallery = props => {
 	let dogs = props.data;
 

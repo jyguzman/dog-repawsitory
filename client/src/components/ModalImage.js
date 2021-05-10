@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '10px',
     padding: theme.spacing(2, 4, 3),
     justifyContent: 'center'
-  },
+  }
 }));
 
 export default function ModalImage( {url, title}) {
@@ -46,9 +46,9 @@ export default function ModalImage( {url, title}) {
         }}
       >
         <Fade in={open}>
-          <div className={classes.paper}>
-            <img className="dog-img" src={url} alt={title} />
-          </div>
+            <div className={classes.paper}>
+              <img height="250" width="250px" src={url} alt={title} />
+            </div>
         </Fade>
       </Modal>
     </div>
