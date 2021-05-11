@@ -19,13 +19,8 @@ export default function BreedList(props) {
       getOptionLabel={(option) => option.breed}
       onChange={props.submitHandler}
       style={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Search breeds." variant="outlined" />}
+      renderInput={(params) => <TextField {...params} 
+          label="Search breeds." variant="outlined" />}
     />
   );
 }
-
-/*const breedOptions = [
-  { breed: 'Corgi' },
-  { breed: 'Poodle' },
-  { breed: 'Collie' },
-]*/

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Gallery from './Gallery';
 import ModalImage from './ModalImage';
 import Pagination from "@material-ui/lab/Pagination";
 import { Box, Container, makeStyles } from "@material-ui/core";
@@ -8,18 +7,6 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 
 const useStyles = makeStyles(theme => ({
-	root: {
-	    display: 'flex',
-	    flexWrap: 'wrap',
-	    justifyContent: 'space-around',
-	    overflow: 'hidden',
-	    backgroundColor: theme.palette.background.paper,
-	},
-	gridList: {
-	    width: 750,
-	    height: 450,
-	    paddingRight: '0px'
-	},
 	container: {
 		flexWrap: "wrap",
 		justifyContent: "center",
@@ -79,8 +66,5 @@ const GalleryList = props => {
 	    </div>
   	);
 };
-
-
-
 
 export default GalleryList;

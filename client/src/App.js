@@ -6,7 +6,6 @@ import GalleryList from './components/GalleryList';
 import BreedList from './components/BreedList';
 import MostSearched from './components/MostSearched';
 import Nav from './components/Nav';
-import Grow from '@material-ui/core/Grow';
 import axios from 'axios';
 
 function App() {
@@ -67,12 +66,14 @@ function App() {
           <BreedList 
           breedOptions={breedsList}
           submitHandler={(event, searchTerm) => 
-          { if(searchTerm != null) submitHandler(event, searchTerm.breed)}}/>
+          { if(searchTerm != null) 
+              submitHandler(event, searchTerm.breed)}}/>
         </div>
         <Nav mostPopularHandler={e => mostPopularHandler(e)} />
       </div>
       
-      <MostSearched topTen={topTen} imgs={imgs} hidden={hiddenPopular}/>
+      <MostSearched topTen={topTen} imgs={imgs} 
+        hidden={hiddenPopular}/>
       <GalleryList data={dogs} hidden={hiddenGallery} />
     </div>
       

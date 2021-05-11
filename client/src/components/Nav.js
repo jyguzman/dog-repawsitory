@@ -5,7 +5,7 @@ const Nav = ( {mostPopularHandler} ) => {
 	return (
 		<div className="mostPopularButton">
 			<Button variant="contained" color="primary" onClick={mostPopularHandler}>
-				Most Popular
+				Top Dogs
 			</Button>
 		</div>
 	);
