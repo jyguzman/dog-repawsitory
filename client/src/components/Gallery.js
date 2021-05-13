@@ -11,24 +11,14 @@ const useStyles = makeStyles(theme => ({
 		flexWrap: "wrap",
 		justifyContent: "center",
 		paddingTop: "10px"
-	},
-	paginator: {
-		display: "flex",
-		justifyContent: "center",
-	    padding: "10px"
 	}
 }));
 
-const GalleryList = props => {
+const Gallery = props => {
 	const classes = useStyles();
 	const dogs = props.data;
-	const numDogs = dogs.length;
-	const perPage = 9;
-	let [page, setPage] = useState(1);
-
-	const handlePageChange = (event, value) => {
-		setPage(value);
-	};
+	const page = props.page;
+	const perPage = props.perPage;
 
 	return (
 	    <div className="dogs">
@@ -48,23 +38,8 @@ const GalleryList = props => {
 			          })}
 			    </Grid>
 		    </Box>
-		    <Container className={classes.container}>
-		        <Pagination
-		          count={Math.ceil(numDogs/perPage)}
-		          page={page}
-		          onChange={handlePageChange}
-		          defaultPage={1}
-		          color="primary"
-		          size="large"
-		          variant="outlined"
-		          showFirstButton
-		          showLastButton
-		          disabled={props.hidden ? true : false}
-		          className={classes.paginator}
-		        />
-		    </Container>
 	    </div>
   	);
 };
 
-export default GalleryList;
+export default Gallery;
