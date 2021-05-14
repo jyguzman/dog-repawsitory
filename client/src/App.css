@@ -13,6 +13,22 @@
   }
 }
 
+body {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+th {
+  text-align: center;
+  border: 1px solid black;
+  background: #018ded;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
