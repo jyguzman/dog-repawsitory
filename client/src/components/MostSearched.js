@@ -13,8 +13,8 @@ const useStyles = makeStyles(theme => ({
 		paddingTop: "10px"
 	},
 	media: {
-    	height: 250,
-    	width: 350
+    	height: 300,
+    	width: 320
   	},
 	paginator: {
 		justifyContent: "center",
