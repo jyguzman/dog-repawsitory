@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, makeStyles } from "@material-ui/core";
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -27,7 +28,7 @@ const MostSearched = props => {
 	let topTen = props.topTen;
 
 	return (
-		<Box className={classes.container} 
+		<Container className={classes.container} 
 			display={props.hidden ? "none" : "flex"}>
 		    	<Grid className="mostPopularDogs" 
 		    		container direction="row" 
@@ -56,7 +57,7 @@ const MostSearched = props => {
 			            );
 			          })}
 			    </Grid>
-		</Box >
+		</Container >
 	);
 }
 

@@ -21,7 +21,7 @@ const Gallery = props => {
 	const perPage = props.perPage;
 
 	return (
-	    <div className="dogs">
+	    <Container className="dogs">
 		    <Box className={classes.container} 
 		    	display={props.hidden ? "none" : "flex"}>
 		    	<Grid container direction="row" justify="center" alignItems="center" 
@@ -38,7 +38,7 @@ const Gallery = props => {
 			          })}
 			    </Grid>
 		    </Box>
-	    </div>
+	    </Container>
   	);
 };
 
