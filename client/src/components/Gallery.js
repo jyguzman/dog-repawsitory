@@ -6,24 +6,14 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 
-const useStyles = makeStyles(theme => ({
-	container: {
-		flexWrap: "wrap",
-		justifyContent: "center",
-		paddingTop: "10px"
-	}
-}));
-
 const Gallery = props => {
-	const classes = useStyles();
 	const dogs = props.data;
 	const page = props.page;
 	const perPage = props.perPage;
 
 	return (
 		<Container>
-		    <Box className="dogs">
-			    <Container className={classes.container} 
+		    <Box className="dogs"
 			    	display={props.hidden ? "none" : "flex"}>
 			    	<Grid container direction="row" justify="center" alignItems="center" 
 			    	spacing={1}>
@@ -38,7 +28,6 @@ const Gallery = props => {
 				            );
 				          })}
 				    </Grid>
-			    </Container>
 		    </Box>
 	    </Container>
   	);
