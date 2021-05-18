@@ -21,22 +21,24 @@ const Gallery = props => {
 	const perPage = props.perPage;
 
 	return (
-	    <Container className="dogs">
-		    <Box className={classes.container} 
-		    	display={props.hidden ? "none" : "flex"}>
-		    	<Grid container direction="row" justify="center" alignItems="center" 
-		    	spacing={1}>
-			        {dogs
-			          .slice((page - 1) * perPage, page * perPage)
-			          .map((dog, index) => {
-			            return (
-			            	<Grid item key={index} xs={4}>
-			            			<ModalImage 
-					            		url={dog} title={"dog"} key={index+1} />      
-					        </Grid>
-			            );
-			          })}
-			    </Grid>
+		<Container>
+		    <Box className="dogs">
+			    <Container className={classes.container} 
+			    	display={props.hidden ? "none" : "flex"}>
+			    	<Grid container direction="row" justify="center" alignItems="center" 
+			    	spacing={1}>
+				        {dogs
+				          .slice((page - 1) * perPage, page * perPage)
+				          .map((dog, index) => {
+				            return (
+				            	<Grid item key={index} xs={4}>
+				            			<ModalImage 
+						            		url={dog} title={"dog"} key={index+1} />      
+						        </Grid>
+				            );
+				          })}
+				    </Grid>
+			    </Container>
 		    </Box>
 	    </Container>
   	);

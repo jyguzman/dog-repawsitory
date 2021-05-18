@@ -28,36 +28,38 @@ const MostSearched = props => {
 	let topTen = props.topTen;
 
 	return (
-		<Container className={classes.container} 
-			display={props.hidden ? "none" : "flex"}>
-		    	<Grid className="mostPopularDogs" 
-		    		container direction="row" 
-		    		justify="center" alignItems="center" 
-		    		spacing={2}>
-			        {topTen
-			          .map((dog, index) => {
-			            return (
-			            	<Grid item key={index} xs={4}>
-				              <Card >
-				              	<CardMedia
-				              		className={classes.media}
-				              		image={dog.image}
-				              		title="dog"
-				              	/>
-				              	<Grid container justify="center">
-					              	<CardContent>
-					              		<Typography gutterBottom 
-					              			variant="h5" component="h2">
-	            							{dog.breed}
-	          							</Typography>
-					              	</CardContent>
-				              	</Grid>
-				              </Card>
-					        </Grid>
-			            );
-			          })}
-			    </Grid>
-		</Container >
+		<Container>
+			<Box className={classes.container} 
+				display={props.hidden ? "none" : "flex"}>
+			    	<Grid className="mostPopularDogs" 
+			    		container direction="row" 
+			    		justify="center" alignItems="center" 
+			    		spacing={2}>
+				        {topTen
+				          .map((dog, index) => {
+				            return (
+				            	<Grid item key={index} xs={4}>
+					              <Card >
+					              	<CardMedia
+					              		className={classes.media}
+					              		image={dog.image}
+					              		title="dog"
+					              	/>
+					              	<Grid container justify="center">
+						              	<CardContent>
+						              		<Typography gutterBottom 
+						              			variant="h5" component="h2">
+		            							{dog.breed}
+		          							</Typography>
+						              	</CardContent>
+					              	</Grid>
+					              </Card>
+						        </Grid>
+				            );
+				          })}
+				    </Grid>
+			</Box >
+		</Container>
 	);
 }
 

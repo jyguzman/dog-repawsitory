@@ -13,14 +13,14 @@ body {
 	display: flex;
 	align-content: center;
 	justify-content: center;
-	max-width: 50%;
+	max-width: 75%;
     margin: 0 auto;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
 .color {
-	width: 1000px;
+	width: 100%;
 	background-color: #484848;
 	display: flex;
 	justify-content: center;
