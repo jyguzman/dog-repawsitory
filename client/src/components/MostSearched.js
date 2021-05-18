@@ -14,8 +14,8 @@ const useStyles = makeStyles(theme => ({
 		paddingTop: "10px"
 	},
 	media: {
-    	height: 300,
-    	width: 320
+    	width: "100%",
+    	height: 250
   	},
 	paginator: {
 		justifyContent: "center",
@@ -44,11 +44,12 @@ const MostSearched = props => {
 					              		className={classes.media}
 					              		image={dog.image}
 					              		title="dog"
+					              		component="img"
 					              	/>
 					              	<Grid container justify="center">
 						              	<CardContent>
 						              		<Typography gutterBottom 
-						              			variant="h5" component="h2">
+						              			variant="h6" component="h6">
 		            							{dog.breed}
 		          							</Typography>
 						              	</CardContent>
