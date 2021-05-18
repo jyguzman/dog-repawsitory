@@ -14,20 +14,20 @@ const Gallery = props => {
 	return (
 		<Container>
 		    <Box className="dogs"
-			    	display={props.hidden ? "none" : "flex"}>
-			    	<Grid container direction="row" justify="center" alignItems="center" 
+			    display={props.hidden ? "none" : "flex"}>
+			    <Grid container direction="row" justify="center" alignItems="center" 
 			    	spacing={1}>
-				        {dogs
-				          .slice((page - 1) * perPage, page * perPage)
-				          .map((dog, index) => {
+				    {dogs
+				        .slice((page - 1) * perPage, page * perPage)
+				        .map((dog, index) => {
 				            return (
 				            	<Grid item key={index} xs={4}>
 				            			<ModalImage 
 						            		url={dog} title={"dog"} key={index+1} />      
 						        </Grid>
 				            );
-				          })}
-				    </Grid>
+				        })}
+				</Grid>
 		    </Box>
 	    </Container>
   	);

@@ -67,8 +67,7 @@ function App() {
   }, []);
 
   return (
-    <Container className="app">
-      <div className="head">
+    <Container>
         <Header />
         <div className="search-bar">
           <BreedList 
@@ -80,7 +79,6 @@ function App() {
           }}/>
         </div>
         <Nav mostPopularHandler={e => mostPopularHandler(e)} />
-      </div>
       
       <MostSearched topTen={topTen} hidden={hiddenPopular}/>
       <Gallery data={dogs} page={page} perPage={perPage}

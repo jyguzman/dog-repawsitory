@@ -13,8 +13,7 @@ body {
 	display: flex;
 	align-content: center;
 	justify-content: center;
-	max-width: 75%;
-    margin: 0 auto;
+	
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -30,11 +29,6 @@ body {
 .mostPopularButton {
 	display: flex;
 	padding-top: 15px;
-	justify-content: center;
-}
-
-.popularDog {
-	display: flex;
 	justify-content: center;
 }
 
@@ -67,13 +61,7 @@ body {
 .search-bar {
 	padding-top: 25px;
 	justify-content: center;
-	width: 100%;
-	position: relative;
 	display: flex;
-}
-
-.search-imgs {
-	text-align: center;
 }
 
 .dogs {
