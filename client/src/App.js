@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import './App.css';
+import Container from '@material-ui/core/Container';
 import Header from './components/Header';
 import Gallery from './components/Gallery';
 import BreedList from './components/BreedList';
@@ -66,7 +67,7 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
+    <Container className="app">
       <div className="head">
         <Header />
         <div className="search-bar">
@@ -87,7 +88,7 @@ function App() {
       <Paginator pages={Math.ceil(dogs.length/perPage)} page={page}
         handlePageChange={handlePageChange} isDisabled={hiddenGallery}
       />
-    </div>
+    </Container>
       
   );
 };
