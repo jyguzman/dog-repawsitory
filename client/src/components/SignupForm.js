@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -11,6 +11,9 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import firebase from 'firebase/app';
 import "firebase/auth";
+import {authMethods} from '../firebase/authmethods';
+import {firebaseAuth} from '../provider/AuthProvider';
+import {withRouter} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -22,82 +25,63 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SignupForm = ( { onSuccess } ) => {
+const SignupForm = (props) => {
 	const classes = useStyles();
-	const [email, setEmail] = React.useState("");
-  	const [password, setPassword] = React.useState("");
+	const {handleSignup, inputs, setInputs, errors} = React.useContext(firebaseAuth);
 
   	const [open, setOpen] = React.useState(false);
 
 	  const handleClickOpen = () => {
-	    setOpen(true);
+	    	setOpen(true);
 	  };
 
-	  const handleClose = (e, loggedIn) => {
-	  	if (loggedIn)
-	  		handleLogin(e);
-	    setOpen(false);
+	  const handleClose = (e) => {
+	    	setOpen(false);
 	  };
 
-  	const handleLogin = async (e) => {
+	  const handleSubmit = async (e) => {
 	    e.preventDefault();
-	    const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
-		  .then((userCredential) => {
-		    // Signed in 
-		    var user = userCredential.user;
-		    // ...
-		  })
-		  .catch((error) => {
-		    var errorCode = error.code;
-		    var errorMessage = error.message;
-		    // ..
-		  });
-	    return;
-  	};
+	    await handleSignup();
+	    //push home
+	    props.history.push('/');
+	  }
+
+	  const handleChange = event => {
+	    const {name, value} = event.target;
+	    setInputs(prev => ({...prev, [name]: value}));
+	  }
 
 	return ( 
 		<Container className={classes.container}>
 			<Button variant="outlined" color="primary" onClick={handleClickOpen}>
-		        Login
+		        Sign Up
 		    </Button>
-			<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-	        	<DialogTitle id="form-dialog-title">Sign Up</DialogTitle>
-		        <DialogContent>
-		          <DialogContentText>
-		            To sign up to this website, please enter your email address and password.
-		          </DialogContentText>
-		          <TextField
-		            autoFocus
-		            margin="dense"
-		            id="name"
-		            label="Email Address"
-		            type="email"
-		            fullWidth
-		            value={email}
-		            onChange={(event) => setEmail(event.target.value)}
-		          />
-		          <br></br>
-		          <TextField
-		            autoFocus
-		            margin="dense"
-		            id="name"
-		            label="Password"
-		            type="password"
-		            value={password}
-		            onChange={(event) => setPassword(event.target.value)}
-		          />
-		        </DialogContent>
-		        <DialogActions>
-		          <Button onClick={e => handleClose(e, false)} color="primary">
-		            Cancel
-		          </Button>
-		          <Button onClick={e => handleClose(e, true)} color="primary">
-		            Sign up
-		          </Button>
-		        </DialogActions>
-	      	</Dialog>
+		    <form onSubmit={handleSubmit}>
+				<Dialog disablePortal open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+		        	<DialogTitle id="form-dialog-title">Sign Up</DialogTitle>
+			        <DialogContent>
+			          <DialogContentText>
+			            To sign up to this website, please enter your email address and password.
+			          </DialogContentText>
+				          
+					  <input onChange={handleChange} name="email" placeholder="email" value={inputs.email} />
+					  <input onChange={handleChange} name="password" placeholder="password" value={inputs.password} />
+					  
+			        </DialogContent>
+			        <DialogActions>
+			        	<Button color="primary" type="submit" onClick={e => handleClose(e)}>
+			        		Sign Up
+			        	</Button>
+
+				        <Button onClick={e => handleClose(e)} color="primary">
+				        	Cancel
+				        </Button>
+			        </DialogActions>
+		      	</Dialog>
+	      	</form>
+	      	{errors.length > 0 ? errors.map(error => <p style={{color: 'red'}}>{error}</p> ) : null}
 		</Container>
 	);
 };
 
-export default SignupForm;
+export default withRouter(SignupForm);

@@ -5,25 +5,15 @@ import {Route, Switch} from 'react-router-dom'
 import Signup from './components/Signup'
 
 import './App.css';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import Header from './components/Header';
-import Gallery from './components/Gallery';
-import BreedList from './components/BreedList';
-import MostSearched from './components/MostSearched';
-import Nav from './components/Nav';
-import Paginator from './components/Paginator';
-import SignupForm from './components/SignupForm';
-import ModalSignup from './components/ModalSignup';
 import UnauthenticatedApp from './components/UnauthenticatedApp';
+import AuthenticatedApp from './components/AuthenticatedApp';
 import axios from 'axios';
 import "firebase/auth";
 require('dotenv').config();
 
 function App() {
-  const {handleSignup} = useContext(firebaseAuth)
-    console.log(handleSignup)
-  const [user, setUser] = React.useState(null);
+  const { token } = useContext(firebaseAuth);
+  //const [user, setUser] = React.useState(null);
   
   let [dogs, setDogs] = useState([]);
   let [breedsList, setBreedsList] = useState([]);
@@ -80,34 +70,28 @@ function App() {
     getBreedList();
   }, []);
 
-/**<Container>
-        <Header />
-        <div className="search-bar">
-          <BreedList 
-          breedOptions={breedsList}
-          submitHandler={(event, searchTerm) => { 
-            if(searchTerm != null) 
-              submitHandler(event, searchTerm.breed); 
-            setPage(1); 
-          }}/>
-        </div>
-
-        <Nav mostPopularHandler={e => mostPopularHandler(e)} />
-      <MostSearched topTen={topTen} hidden={hiddenPopular}/>
-      <Gallery data={dogs} page={page} perPage={perPage}
-        hidden={hiddenGallery} />
-      <Paginator pages={Math.ceil(dogs.length/perPage)} page={page}
-        handlePageChange={handlePageChange} isDisabled={hiddenGallery}
-      />
-    </Container>*/
   return (
-       <UnauthenticatedApp 
-          breedsList={breedsList} 
-          submitHandler={submitHandler} setPage={setPage}
-          mostPopularHandler={mostPopularHandler} topTen={topTen}
-          hiddenGallery={hiddenGallery} hiddenPopular={hiddenPopular}
-          dogs={dogs} page={page} perPage={perPage}
-          handlePageChange={handlePageChange} />
+      <>
+        <Switch>
+          <Route exact path='/' 
+            render={() =>  
+              token === null ? <UnauthenticatedApp 
+                breedsList={breedsList} 
+                submitHandler={submitHandler} setPage={setPage}
+                mostPopularHandler={mostPopularHandler} topTen={topTen}
+                hiddenGallery={hiddenGallery} hiddenPopular={hiddenPopular}
+                dogs={dogs} page={page} perPage={perPage}
+                handlePageChange={handlePageChange} /> : <AuthenticatedApp 
+                breedsList={breedsList} 
+                submitHandler={submitHandler} setPage={setPage}
+                mostPopularHandler={mostPopularHandler} topTen={topTen}
+                hiddenGallery={hiddenGallery} hiddenPopular={hiddenPopular}
+                dogs={dogs} page={page} perPage={perPage}
+                handlePageChange={handlePageChange} />}
+             />
+         
+        </Switch>
+      </>
   );
 };
 

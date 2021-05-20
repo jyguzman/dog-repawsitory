@@ -1,3 +1,5 @@
+import React, { useContext } from 'react';
+import {firebaseAuth} from '../provider/AuthProvider'
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Header from './Header';
@@ -6,12 +8,13 @@ import BreedList from './BreedList';
 import MostSearched from './MostSearched';
 import Nav from './Nav';
 import Paginator from './Paginator';
-import SignupForm from './SignupForm';
-import SignIn from './SignIn'
+//import SignOut from './SignOut'
 
-const UnauthenticatedApp = (props) => {
+const AuthenticatedApp = (props) => {
+	const {handleSignout} = useContext(firebaseAuth);
 	return (
 	    <Container>
+	    	<div> Login Successful </div>
 	        <Header />
 	        <div className="search-bar">
 	          <BreedList 
@@ -24,8 +27,7 @@ const UnauthenticatedApp = (props) => {
 	        </div>
 
 	      <Nav mostPopularHandler={e => props.mostPopularHandler(e)} />
-	      <SignupForm />
-	      <SignIn />
+	      <button onClick={handleSignout}>sign out </button>
 	      <MostSearched topTen={props.topTen} hidden={props.hiddenPopular}/>
 	      <Gallery data={props.dogs} page={props.page} perPage={props.perPage}
 	        hidden={props.hiddenGallery} />
@@ -36,4 +38,4 @@ const UnauthenticatedApp = (props) => {
   );
 };
 
-export default UnauthenticatedApp;
+export default AuthenticatedApp;
