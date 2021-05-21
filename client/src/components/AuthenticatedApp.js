@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
-import {firebaseAuth} from '../provider/AuthProvider'
+import {firebaseAuth} from '../provider/AuthProvider';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Header from './Header';
 import Gallery from './Gallery';
+import FavoritesGallery from './FavoritesGallery';
 import BreedList from './BreedList';
 import MostSearched from './MostSearched';
 import Nav from './Nav';
 import Paginator from './Paginator';
-//import SignOut from './SignOut'
 
 const AuthenticatedApp = (props) => {
 	const {handleSignout} = useContext(firebaseAuth);
@@ -26,11 +26,14 @@ const AuthenticatedApp = (props) => {
 	          }}/>
 	        </div>
 
-	      <Nav mostPopularHandler={e => props.mostPopularHandler(e)} />
-	      <button onClick={handleSignout}>sign out </button>
+	      <Nav auth={props.auth} 
+	      mostPopularHandler={e => props.mostPopularHandler(e)} 
+	      showFavorites={props.showFavorites} />
 	      <MostSearched topTen={props.topTen} hidden={props.hiddenPopular}/>
-	      <Gallery data={props.dogs} page={props.page} perPage={props.perPage}
+	      <Gallery auth={props.auth} data={props.dogs} page={props.page} perPage={props.perPage}
 	        hidden={props.hiddenGallery} />
+	      <FavoritesGallery auth={props.auth} data={props.favorites} page={props.page} perPage={props.perPage}
+	        hidden={props.hiddenFavorites} />
 	      <Paginator pages={Math.ceil(props.dogs.length/props.perPage)} page={props.page}
 	        handlePageChange={props.handlePageChange} isDisabled={props.hiddenGallery}
 	      />

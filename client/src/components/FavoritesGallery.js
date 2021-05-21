@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 
-const Gallery = props => {
+const FavoritesGallery = props => {
 	const dogs = props.data;
 	const page = props.page;
 	const perPage = props.perPage;
@@ -34,4 +34,4 @@ const Gallery = props => {
   	);
 };
 
-export default Gallery;
+export default FavoritesGallery;

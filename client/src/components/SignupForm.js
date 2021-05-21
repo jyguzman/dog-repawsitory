@@ -53,7 +53,7 @@ const SignupForm = (props) => {
 
 	return ( 
 		<Container className={classes.container}>
-			<Button variant="outlined" color="primary" onClick={handleClickOpen}>
+			<Button variant="contained" color="primary" onClick={handleClickOpen}>
 		        Sign Up
 		    </Button>
 		    <form onSubmit={handleSubmit}>

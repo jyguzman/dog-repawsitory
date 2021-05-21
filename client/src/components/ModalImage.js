@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Image from './Image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { Box } from "@material-ui/core";
+import {firebaseAuth} from '../provider/AuthProvider';
+import firebase from 'firebase';
+const db = firebase.firestore();
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -18,8 +24,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ModalImage( {url, title}) {
+export default function ModalImage(props) {
   const classes = useStyles();
+  const {inputs} = useContext(firebaseAuth);
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -30,9 +37,20 @@ export default function ModalImage( {url, title}) {
     setOpen(false);
   };
 
+  const saveImage = (e, url) => {
+    e.preventDefault();
+    console.log(inputs.email);
+    const ref = db.collection("users").doc(inputs.email);
+    console.log(url);
+    const res = ref.update({
+        favorites: firebase.firestore.FieldValue.arrayUnion(url)
+    });
+    console.log(res);
+  };
+
   return (
     <div>
-      <Image url={url} title={title} handleOpen={handleOpen}/>
+      <Image url={props.url} title={props.title} handleOpen={handleOpen}/>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -47,7 +65,13 @@ export default function ModalImage( {url, title}) {
       >
         <Fade in={open}>
             <div className={classes.paper}>
-              <img height="400" width="400" src={url} alt={title} />
+              <img height="400" width="400" src={props.url} alt={props.title} />
+                
+                <Box display={props.auth ? "initial" : "none"}>
+                  <button onClick={(e, url) => saveImage(e, props.url)}>
+                    <FontAwesomeIcon icon={faHeart} />
+                  </button>
+                </Box>
             </div>
         </Fade>
       </Modal>

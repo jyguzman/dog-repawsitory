@@ -23,11 +23,9 @@ const UnauthenticatedApp = (props) => {
 	          }}/>
 	        </div>
 
-	      <Nav mostPopularHandler={e => props.mostPopularHandler(e)} />
-	      <SignupForm />
-	      <SignIn />
+	      <Nav auth={props.auth} mostPopularHandler={e => props.mostPopularHandler(e)} />
 	      <MostSearched topTen={props.topTen} hidden={props.hiddenPopular}/>
-	      <Gallery data={props.dogs} page={props.page} perPage={props.perPage}
+	      <Gallery auth={props.auth} data={props.dogs} page={props.page} perPage={props.perPage}
 	        hidden={props.hiddenGallery} />
 	      <Paginator pages={Math.ceil(props.dogs.length/props.perPage)} page={props.page}
 	        handlePageChange={props.handlePageChange} isDisabled={props.hiddenGallery}

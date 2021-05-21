@@ -33,12 +33,6 @@ body {
 	color: white;
 }
 
-.mostPopularButton {
-	display: flex;
-	padding-top: 15px;
-	justify-content: center;
-}
-
 .headerImg {
 	max-width: 100%;
 	height: 150px;

@@ -1,17 +1,19 @@
 import firebaseconfig from './firebaseIndex';
 import firebase from 'firebase';
+const db = firebase.firestore();
 
 export const authMethods = {
-
 // firebase helper methods go here... 
 	signup: (email, password, setErrors, setToken) => {
 		firebase.auth().createUserWithEmailAndPassword(email,password) 
 	      .then( async res => {
 	      	const token = await Object.entries(res.user)[5][1].b;
-	          //set token to localStorage 
-	          await localStorage.setItem('token', token);
-	          //grab token from local storage and set to state. 
-	          setToken(window.localStorage.token);
+	        await localStorage.setItem('token', token);
+	        setToken(window.localStorage.token);
+	        await db.collection("users").doc(email).set({
+	        	"email": email,
+	        	favorites: []
+	        });
 	        console.log(res);
 	      })
 	      .catch(err => {

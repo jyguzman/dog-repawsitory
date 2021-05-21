@@ -52,7 +52,7 @@ const SignIn = () => {
 
 	return ( 
 		<Container className={classes.container}>
-			<Button variant="outlined" color="primary" onClick={handleClickOpen}>
+			<Button variant="contained" color="primary" onClick={handleClickOpen}>
 		        Sign In
 		    </Button>
 		    <form onSubmit={handleSubmit}>
