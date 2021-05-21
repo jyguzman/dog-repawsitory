@@ -3,8 +3,6 @@ import ModalImage from './ModalImage';
 import Pagination from "@material-ui/lab/Pagination";
 import { Box, Container, makeStyles } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 
 const FavoritesGallery = props => {
 	const dogs = props.data;

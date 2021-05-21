@@ -42,7 +42,6 @@ const SignupForm = (props) => {
 	  const handleSubmit = async (e) => {
 	    e.preventDefault();
 	    await handleSignup();
-	    //push home
 	    props.history.push('/');
 	  }
 
