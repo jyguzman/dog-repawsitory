@@ -16,6 +16,7 @@ import {firebaseAuth} from '../provider/AuthProvider';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { Box } from "@material-ui/core";
+import Input from '@material-ui/core/Input';
 
 function Alert(props) {
   return (<MuiAlert elevation={6} variant="filled" {...props} />);
@@ -26,8 +27,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
   },
-  form: {
-  	display: 'flex'
+  input: {
+  	display: 'flex',
+  	flexDirection: 'column',
+  	margin: theme.spacing(1)
   }
 }));
 
@@ -66,35 +69,58 @@ const SignIn = () => {
 
 	  const handleChange = event => {
 	    const {name, value} = event.target;
+	    console.log(inputs);
 	    setInputs(prev => ({...prev, [name]: value}));
 	  }
 
 	return ( 
 		<Container className={classes.container}>
 			<Button variant="contained" color="primary" onClick={handleClickOpen}>
-		        Sign In
+		        Log In
 		    </Button>
 		    <form onSubmit={handleSubmit}>
 				<Dialog disablePortal open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-		        	<DialogTitle id="form-dialog-title">Sign Up</DialogTitle>
-			        <DialogContent>
-			          <DialogContentText>
-			            To log into an existing account, please enter your email address and password.
-			          </DialogContentText>
-				          
-					  <input onChange={handleChange} name="email" placeholder="email" value={inputs.email} />
-					  <input onChange={handleChange} name="password" placeholder="password" value={inputs.password} />
-					  
-			        </DialogContent>
-			        <DialogActions>
-			        	<Button color="primary" type="submit" onClick={e => {handleClose(e);}}>
-			        		Log In
-			        	</Button>
+			        	<DialogTitle id="form-dialog-title">Log In</DialogTitle>
+				        <DialogContent>
+				          <DialogContentText>
+				            To log in, please enter your email address and password.
+				          </DialogContentText>
+					       
+					    <Container className={classes.input}>
+					    	<TextField
+					            autoFocus
+					            margin="dense"
+					            id="email"
+					            label="Email Address"
+					            type="email"
+					            fullWidth
+					            name="email"
+					            onChange={event => handleChange(event)}
+					            value={inputs.email}
+					          />
+					          <TextField
+					            autoFocus
+					            margin="dense"
+					            id="password"
+					            name="password"
+					            label="Password"
+					            type="password"
+					            fullWidth
+					            onChange={event => handleChange(event)}
+					            value={inputs.password}
+					          />
+						  	
+				        </Container>
+				        </DialogContent>
+				        <DialogActions>
+				        	<Button color="primary" type="submit" onClick={e => {handleClose(e);}}>
+				        		Log In
+				        	</Button>
 
-				        <Button onClick={e => handleClose(e)} color="primary">
-				        	Cancel
-				        </Button>
-			        </DialogActions>
+					        <Button onClick={e => handleClose(e)} color="primary">
+					        	Cancel
+					        </Button>
+				        </DialogActions>
 		      	</Dialog>
 	      	</form>
 	      	

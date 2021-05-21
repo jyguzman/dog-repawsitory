@@ -23,8 +23,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
   },
-  form: {
-  	display: 'flex'
+  input: {
+  	display: 'flex',
+  	flexDirection: 'column',
+  	margin: theme.spacing(1)
   }
 }));
 
@@ -68,8 +70,31 @@ const SignUp = (props) => {
 			            To sign up to this website, please enter your email address and password.
 			          </DialogContentText>
 				          
-					  <input onChange={handleChange} name="email" placeholder="email" value={inputs.email} />
-					  <input onChange={handleChange} name="password" placeholder="password" value={inputs.password} />
+					  <Container className={classes.input}>
+					    	<TextField
+					            autoFocus
+					            margin="dense"
+					            id="email"
+					            label="Email Address"
+					            type="email"
+					            fullWidth
+					            name="email"
+					            onChange={event => handleChange(event)}
+					            value={inputs.email}
+					          />
+					          <TextField
+					            autoFocus
+					            margin="dense"
+					            id="password"
+					            name="password"
+					            label="Password"
+					            type="password"
+					            fullWidth
+					            onChange={event => handleChange(event)}
+					            value={inputs.password}
+					          />
+						  	
+				        </Container>
 					  
 			        </DialogContent>
 			        <DialogActions>

@@ -51,7 +51,7 @@ const UnauthenticatedApp = (props) => {
 	      />
 	      {authType === "signout" ? <Snackbar open={alertOpen} autoHideDuration={3000} onClose={handleAlertClose}>
 		        <Alert onClose={handleAlertClose} severity={"success"}>
-		        	Successfully signed out.
+		        	You have been signed out.
 		        </Alert>
       	  </Snackbar> : null}
 	    </Container>   
