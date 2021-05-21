@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 const SignUp = (props) => {
 	const classes = useStyles();
 	const {handleSignup, inputs, setInputs, errors} = React.useContext(firebaseAuth);
-
+	const [pass2, setPass2] = useState("");
   	const [open, setOpen] = React.useState(false);
 
 	  const handleClickOpen = () => {
@@ -55,6 +55,11 @@ const SignUp = (props) => {
 	  const handleChange = event => {
 	    const {name, value} = event.target;
 	    setInputs(prev => ({...prev, [name]: value}));
+	  }
+
+	  const handleMatch = event => {
+	  	//const {name, value} = event.target;
+	  	setPass2(event.target.value); 
 	  }
 
 	return ( 
@@ -93,15 +98,28 @@ const SignUp = (props) => {
 					            onChange={event => handleChange(event)}
 					            value={inputs.password}
 					          />
+					          <TextField
+					            autoFocus
+					            margin="dense"
+					            id="pass2"
+					            name="pass2"
+					            label="Password"
+					            type="password"
+					            fullWidth
+					            onChange={event => handleMatch(event)}
+					            value={pass2}
+					            helperText={(pass2 === "" || pass2 !== inputs.password)
+					            	? "Passwords must match." : ""}
+					            error={pass2 === "" || pass2 !== inputs.password} 
+					          />
 						  	
 				        </Container>
 					  
 			        </DialogContent>
 			        <DialogActions>
-			        	<Button color="primary" type="submit" onClick={e => {
-			        		handleClose(e); 
-			        		
-			        	}}>
+			        	<Button color="primary" 
+			        	type="submit" disabled={pass2 === "" || pass2 !== inputs.password}
+			        	onClick={e => handleClose(e)}>
 			        		Sign Up
 			        	</Button>
 
