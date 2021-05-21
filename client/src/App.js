@@ -92,6 +92,7 @@ function App() {
       hideFavorites(false);
       hidePopular(true);
       hideGallery(true);
+      setPage(1);
     }
   };
 

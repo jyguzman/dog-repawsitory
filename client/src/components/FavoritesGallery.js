@@ -22,7 +22,7 @@ const FavoritesGallery = props => {
 				        .map((dog, index) => {
 				            return (
 				            	<Grid item key={index} xs={4}>
-				            			<ModalImage auth={props.auth}
+				            			<ModalImage auth={false}
 						            		url={dog} title={"dog"} key={index+1} />      
 				            			
 						        </Grid>

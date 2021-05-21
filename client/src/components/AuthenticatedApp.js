@@ -34,8 +34,11 @@ const AuthenticatedApp = (props) => {
 	        hidden={props.hiddenGallery} />
 	      <FavoritesGallery auth={props.auth} data={props.favorites} page={props.page} perPage={props.perPage}
 	        hidden={props.hiddenFavorites} />
-	      <Paginator pages={Math.ceil(props.dogs.length/props.perPage)} page={props.page}
-	        handlePageChange={props.handlePageChange} isDisabled={props.hiddenGallery}
+	      <Paginator 
+	      	pages={props.hiddenFavorites ? Math.ceil(props.dogs.length/props.perPage) : Math.ceil(props.favorites.length/props.perPage)} 
+	      	page={props.page}
+	        handlePageChange={props.handlePageChange} 
+	        isDisabled={props.hiddenGallery && props.hiddenFavorites}
 	      />
 	    </Container>   
   );
