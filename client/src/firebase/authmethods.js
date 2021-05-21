@@ -3,34 +3,26 @@ import firebase from 'firebase';
 const db = firebase.firestore();
 
 export const authMethods = {
-// firebase helper methods go here... 
-	signup: (email, password, setErrors, setToken) => {
+	signup: (email, password, setErrors) => {
 		firebase.auth().createUserWithEmailAndPassword(email,password) 
-	      .then( async res => {
-	      	const token = await Object.entries(res.user)[5][1].b;
-	        await localStorage.setItem('token', token);
-	        setToken(window.localStorage.token);
-	        await db.collection("users").doc(email).set({
-	        	"email": email,
+	      .then(async userCredential => {
+	      	var user = userCredential.user;
+	        await db.collection("users").doc(user.email).set({
+	        	"email": user.email,
 	        	favorites: []
 	        });
-	        console.log(res);
+
 	      })
 	      .catch(err => {
 	        setErrors(prev => ([...prev, err.message]));
 	      })
     },
-  	signin: (email, password, setErrors, setToken) => {
+  	signin: (email, password, setErrors) => {
   		firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
   		.then(() => {
 	  		firebase.auth().signInWithEmailAndPassword(email,password) 
-		      .then( async res => {
-		      	const token = await Object.entries(res.user)[5][1].b;
-		          //set token to localStorage 
-		          await localStorage.setItem('token', token);
-		          //grab token from local storage and set to state. 
-		          setToken(window.localStorage.token);
-		        console.log(res);
+		      .then(async userCredential  => {
+		          var user = userCredential.user;
 		      })
 		      .catch(err => {
 		        setErrors(prev => ([...prev, err.message]));
@@ -41,21 +33,11 @@ export const authMethods = {
 	     })
 
     },
-  	signout: (setErrors, setToken) => {
-  		 // signOut is a no argument function
-	    firebase.auth().signOut().then( res => {
-	      //remove the token
-	      localStorage.removeItem('token')
-	        //set the token back to original state
-	        setToken(null)
+  	signout: (setErrors) => {
+	    firebase.auth().signOut().then(() => {
 	    })
 	    .catch(err => {
-	      //there shouldn't every be an error from firebase but just in case
-	      setErrors(prev => ([...prev, err.message]))
-	      //whether firebase does the trick or not i want my user to do there thing.
-	        localStorage.removeItem('token')
-	          setToken(null)
-	            console.error(err.message)
+	      setErrors(prev => ([...prev, err.message]));
 	    })
     },
 

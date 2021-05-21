@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import { Box } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
-import SignupForm from './SignupForm';
+import SignUp from './SignUp';
 import SignIn from './SignIn';
 import {firebaseAuth} from '../provider/AuthProvider';
 import Grid from '@material-ui/core/Grid';
@@ -49,17 +49,13 @@ const Nav = (props) => {
 
 				<Box display={props.auth ? "none" : "initial"}>
 				<Grid item key={3}>
-					 
-						<SignupForm />
-					
+						<SignUp />
 				</Grid>
 				</Box>
 
 				<Box display={props.auth ? "none" : "initial"}>
 				<Grid item key={4}>
-					
 						<SignIn />
-					
 				</Grid>
 				</Box>
 

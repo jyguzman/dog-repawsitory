@@ -1,3 +1,4 @@
+import React, { useContext } from 'react';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Header from './Header';
@@ -6,10 +7,28 @@ import BreedList from './BreedList';
 import MostSearched from './MostSearched';
 import Nav from './Nav';
 import Paginator from './Paginator';
-import SignupForm from './SignupForm';
-import SignIn from './SignIn'
+import SignUp from './SignUp';
+import SignIn from './SignIn';
+import {firebaseAuth} from '../provider/AuthProvider';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return (<MuiAlert elevation={6} variant="filled" {...props} />);
+}
 
 const UnauthenticatedApp = (props) => {
+	const [alertOpen, setAlertOpen] = React.useState(true);
+	const {handleSignout, authType} = useContext(firebaseAuth);
+
+	const handleAlertClose = (event, reason) => {
+	    if (reason === 'clickaway') {
+	      return;
+	    }
+
+    	setAlertOpen(false);
+  	  };
+
 	return (
 	    <Container>
 	        <Header />
@@ -30,6 +49,11 @@ const UnauthenticatedApp = (props) => {
 	      <Paginator pages={Math.ceil(props.dogs.length/props.perPage)} page={props.page}
 	        handlePageChange={props.handlePageChange} isDisabled={props.hiddenGallery}
 	      />
+	      {authType === "signout" ? <Snackbar open={alertOpen} autoHideDuration={3000} onClose={handleAlertClose}>
+		        <Alert onClose={handleAlertClose} severity={"success"}>
+		        	Successfully signed out.
+		        </Alert>
+      	  </Snackbar> : null}
 	    </Container>   
   );
 };

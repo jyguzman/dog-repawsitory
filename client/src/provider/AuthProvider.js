@@ -2,27 +2,26 @@ import React, { useState } from 'react';
 import {authMethods} from '../firebase/authmethods';
 
 const AuthProvider = (props) => {
-	const [inputs, setInputs] = useState({email: '', password: ''})
-  	const [errors, setErrors] = useState([])
-  	const [token, setToken] = useState(null)	
-
+	const [inputs, setInputs] = useState({email: '', password: ''});
+  	const [errors, setErrors] = useState([]);	
+  	const [authType, setAuthType] = useState("");
 	const handleSignup = () => {
-	    // middle man between firebase and signup 
 	    console.log('handleSignup');
-	    // calling signup from firebase server
-	    return authMethods.signup(inputs.email, inputs.password, setErrors, setToken);
+	    setAuthType("signup");
+	    return authMethods.signup(inputs.email, 
+	    	inputs.password, setErrors);
 	}
 
 	const handleSignin = () => {
-	    //changed to handleSingin
 	    console.log('handleSignin');
-	    // made signup signin
-	    authMethods.signin(inputs.email, inputs.password, setErrors, setToken);
-	    console.log(errors, token);
+	    setAuthType("login"); 
+	    return authMethods.signin(inputs.email, 
+	    	inputs.password, setErrors);
 	}
 
 	const handleSignout = () => {
-	    authMethods.signout(setErrors, setToken);
+		setAuthType("signout");
+	    return authMethods.signout(setErrors);
 	  }
 
 	return (
@@ -30,8 +29,8 @@ const AuthProvider = (props) => {
 		    value={{
 		      	handleSignup,
 		      	handleSignin,
-		      	token,
 		      	inputs,
+		      	authType,
 	      		setInputs,
 	      		errors,
 	      		handleSignout,

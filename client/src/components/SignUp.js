@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -14,6 +14,9 @@ import "firebase/auth";
 import {authMethods} from '../firebase/authmethods';
 import {firebaseAuth} from '../provider/AuthProvider';
 import {withRouter} from 'react-router-dom';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import AuthAlert from './AuthAlert';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SignupForm = (props) => {
+const SignUp = (props) => {
 	const classes = useStyles();
 	const {handleSignup, inputs, setInputs, errors} = React.useContext(firebaseAuth);
 
@@ -38,6 +41,8 @@ const SignupForm = (props) => {
 	  const handleClose = (e) => {
 	    	setOpen(false);
 	  };
+
+	  
 
 	  const handleSubmit = async (e) => {
 	    e.preventDefault();
@@ -68,7 +73,10 @@ const SignupForm = (props) => {
 					  
 			        </DialogContent>
 			        <DialogActions>
-			        	<Button color="primary" type="submit" onClick={e => handleClose(e)}>
+			        	<Button color="primary" type="submit" onClick={e => {
+			        		handleClose(e); 
+			        		
+			        	}}>
 			        		Sign Up
 			        	</Button>
 
@@ -78,9 +86,9 @@ const SignupForm = (props) => {
 			        </DialogActions>
 		      	</Dialog>
 	      	</form>
-	      	{errors.length > 0 ? errors.map(error => <p style={{color: 'red'}}>{error}</p> ) : null}
+	      	
 		</Container>
 	);
 };
 
-export default withRouter(SignupForm);
+export default withRouter(SignUp);

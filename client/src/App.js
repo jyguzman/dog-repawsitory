@@ -14,10 +14,16 @@ const db = firebase.firestore();
 require('dotenv').config();
 
 function App() {
-  const { inputs, token } = useContext(firebaseAuth);
-  
+  //const { user } = useContext(firebaseAuth);
   let [dogs, setDogs] = useState([]);
+  let [user, setUser] = useState(null);
   let [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      setUser(user);
+    })
+  });
 
   let [breedsList, setBreedsList] = useState([]);
 
@@ -75,8 +81,7 @@ function App() {
   };
 
   let getFavoriteDogs = () => {
-    console.log(inputs.email);
-    const ref = db.collection("users").doc(inputs.email);
+    const ref = db.collection("users").doc(user.email);
     ref.get()
     .then((doc) => {
       if (doc.exists) {
@@ -87,7 +92,7 @@ function App() {
 
   let showFavorites = e => {
     e.preventDefault();
-    if (token !== null) {
+    if (user != null) {
       getFavoriteDogs();
       hideFavorites(false);
       hidePopular(true);
@@ -105,7 +110,7 @@ function App() {
         <Switch>
           <Route exact path='/' 
             render={() =>  
-              token === null ? 
+              user == null ? 
                 <UnauthenticatedApp 
                   auth={false}
                   breedsList={breedsList} 

@@ -9,12 +9,29 @@ import BreedList from './BreedList';
 import MostSearched from './MostSearched';
 import Nav from './Nav';
 import Paginator from './Paginator';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import AuthAlert from './AuthAlert';
+
+function Alert(props) {
+  return (<MuiAlert elevation={6} variant="filled" {...props} />);
+}
 
 const AuthenticatedApp = (props) => {
+	const [alertOpen, setAlertOpen] = React.useState(true);
+	const { authType } = React.useContext(firebaseAuth);
+
+	  const handleAlertClose = (event, reason) => {
+	    if (reason === 'clickaway') {
+	      return;
+	    }
+
+    	setAlertOpen(false);
+  	  };
+
 	const {handleSignout} = useContext(firebaseAuth);
 	return (
 	    <Container>
-	    	<div> Login Successful </div>
 	        <Header />
 	        <div className="search-bar">
 	          <BreedList 
@@ -40,6 +57,11 @@ const AuthenticatedApp = (props) => {
 	        handlePageChange={props.handlePageChange} 
 	        isDisabled={props.hiddenGallery && props.hiddenFavorites}
 	      />
+	      <Snackbar open={alertOpen} autoHideDuration={3000} onClose={handleAlertClose}>
+		        <Alert onClose={handleAlertClose} severity={"success"}>
+		          {authType === "signup" ? "Successfully signed up!" : "Successfully logged in!"}
+		        </Alert>
+      	  </Snackbar>
 	    </Container>   
   );
 };

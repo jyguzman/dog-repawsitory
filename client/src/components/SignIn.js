@@ -13,6 +13,13 @@ import firebase from 'firebase/app';
 import "firebase/auth";
 import {authMethods} from '../firebase/authmethods';
 import {firebaseAuth} from '../provider/AuthProvider';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { Box } from "@material-ui/core";
+
+function Alert(props) {
+  return (<MuiAlert elevation={6} variant="filled" {...props} />);
+}
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -29,6 +36,7 @@ const SignIn = () => {
 	const {handleSignin, inputs, setInputs, errors} = React.useContext(firebaseAuth);
 
   	const [open, setOpen] = React.useState(false);
+  	const [alertOpen, setAlertOpen] = React.useState(false);
 
 	  const handleClickOpen = () => {
 	    	setOpen(true);
@@ -38,11 +46,22 @@ const SignIn = () => {
 	    	setOpen(false);
 	  };
 
-	  const handleSubmit = (e) => {
+	  const handleAlertOpen = () => {
+	  		setAlertOpen(true);
+	  }
+
+	  const handleAlertClose = (e, reason) => {
+	  	if (reason === 'clickaway') {
+	      return;
+	    }
+
+    	setAlertOpen(false);
+	  };
+
+	  const handleSubmit = async (e) => {
 	    e.preventDefault();
-	    handleSignin();
-	    console.log('handleSubmit');
-	    console.log(inputs);
+	    await handleSignin();
+	    setAlertOpen(errors.length > 0);
 	  }
 
 	  const handleChange = event => {
@@ -68,8 +87,8 @@ const SignIn = () => {
 					  
 			        </DialogContent>
 			        <DialogActions>
-			        	<Button color="primary" type="submit" onClick={e => handleClose(e)}>
-			        		Sign In
+			        	<Button color="primary" type="submit" onClick={e => {handleClose(e);}}>
+			        		Log In
 			        	</Button>
 
 				        <Button onClick={e => handleClose(e)} color="primary">
@@ -78,7 +97,13 @@ const SignIn = () => {
 			        </DialogActions>
 		      	</Dialog>
 	      	</form>
-	      	{errors.length > 0 ? errors.map(error => <p style={{color: 'red'}}>{error}</p> ) : null}
+	      	
+				<Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
+			        <Alert onClose={handleAlertClose} severity="error">
+			          {errors[0]}
+			        </Alert>
+		      	</Snackbar>
+	      	
 		</Container>
 	);
 };

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ModalImage(props) {
   const classes = useStyles();
-  const {inputs} = useContext(firebaseAuth);
+  var user  = firebase.auth().currentUser;
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -39,8 +39,7 @@ export default function ModalImage(props) {
 
   const saveImage = (e, url) => {
     e.preventDefault();
-    console.log(inputs.email);
-    const ref = db.collection("users").doc(inputs.email);
+    const ref = db.collection("users").doc(user.email);
     console.log(url);
     const res = ref.update({
         favorites: firebase.firestore.FieldValue.arrayUnion(url)
