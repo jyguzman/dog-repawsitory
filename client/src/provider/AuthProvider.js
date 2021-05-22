@@ -5,15 +5,14 @@ const AuthProvider = (props) => {
 	const [inputs, setInputs] = useState({email: '', password: ''});
   	const [errors, setErrors] = useState([]);	
   	const [authType, setAuthType] = useState("");
+
 	const handleSignup = () => {
-	    console.log('handleSignup');
 	    setAuthType("signup");
 	    return authMethods.signup(inputs.email, 
 	    	inputs.password, setErrors);
 	}
 
 	const handleSignin = () => {
-	    console.log('handleSignin');
 	    setAuthType("login"); 
 	    return authMethods.signin(inputs.email, 
 	    	inputs.password, setErrors);

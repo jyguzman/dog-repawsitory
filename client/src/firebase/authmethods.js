@@ -18,7 +18,7 @@ export const authMethods = {
 	      })
     },
   	signin: (email, password, setErrors) => {
-  		firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+  		firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
   		.then(() => {
 	  		firebase.auth().signInWithEmailAndPassword(email,password) 
 		      .then(async userCredential  => {

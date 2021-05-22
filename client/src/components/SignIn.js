@@ -69,7 +69,6 @@ const SignIn = () => {
 
 	  const handleChange = event => {
 	    const {name, value} = event.target;
-	    console.log(inputs);
 	    setInputs(prev => ({...prev, [name]: value}));
 	  }
 

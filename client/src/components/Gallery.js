@@ -5,6 +5,7 @@ import { Box, Container, makeStyles } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
+import firebase from 'firebase';
 
 const Gallery = props => {
 	const dogs = props.data;
@@ -22,8 +23,9 @@ const Gallery = props => {
 				        .map((dog, index) => {
 				            return (
 				            	<Grid item key={index} xs={4}>
-				            			<ModalImage auth={props.auth}
+				            			<ModalImage auth={props.auth} 
 						            		url={dog} title={"dog"} key={index+1} />      
+				            			
 				            			
 						        </Grid>
 				            );

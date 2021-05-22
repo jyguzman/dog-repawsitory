@@ -16,7 +16,6 @@ import {firebaseAuth} from '../provider/AuthProvider';
 import {withRouter} from 'react-router-dom';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import AuthAlert from './AuthAlert';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -44,8 +43,6 @@ const SignUp = (props) => {
 	    	setOpen(false);
 	  };
 
-	  
-
 	  const handleSubmit = async (e) => {
 	    e.preventDefault();
 	    await handleSignup();
@@ -55,11 +52,6 @@ const SignUp = (props) => {
 	  const handleChange = event => {
 	    const {name, value} = event.target;
 	    setInputs(prev => ({...prev, [name]: value}));
-	  }
-
-	  const handleMatch = event => {
-	  	//const {name, value} = event.target;
-	  	setPass2(event.target.value); 
 	  }
 
 	return ( 
@@ -106,7 +98,7 @@ const SignUp = (props) => {
 					            label="Password"
 					            type="password"
 					            fullWidth
-					            onChange={event => handleMatch(event)}
+					            onChange={event => setPass2(event.target.value)}
 					            value={pass2}
 					            helperText={(pass2 === "" || pass2 !== inputs.password)
 					            	? "Passwords must match." : ""}
@@ -118,8 +110,9 @@ const SignUp = (props) => {
 			        </DialogContent>
 			        <DialogActions>
 			        	<Button color="primary" 
-			        	type="submit" disabled={pass2 === "" || pass2 !== inputs.password}
-			        	onClick={e => handleClose(e)}>
+			        		type="submit" 
+			        		disabled={pass2 === "" || pass2 !== inputs.password}
+			        		onClick={e => handleClose(e)}>
 			        		Sign Up
 			        	</Button>
 

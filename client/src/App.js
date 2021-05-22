@@ -14,7 +14,6 @@ const db = firebase.firestore();
 require('dotenv').config();
 
 function App() {
-  //const { user } = useContext(firebaseAuth);
   let [dogs, setDogs] = useState([]);
   let [user, setUser] = useState(null);
   let [favorites, setFavorites] = useState([]);
@@ -40,7 +39,7 @@ function App() {
     setPage(value);
   };
 
-  let submitHandler = (event, searchTerm) => {
+  const submitHandler = (event, searchTerm) => {
     event.preventDefault();
     axios.post("/images", {"breed":searchTerm})
     .then(response => {
@@ -56,7 +55,7 @@ function App() {
     .catch(() => setDogs([]));
   };
 
-  let getBreedList = () => {
+  const getBreedList = () => {
     axios.get("/breeds")
     .then(response => {
       setBreedsList(response.data);
@@ -64,7 +63,7 @@ function App() {
     .catch(() => setBreedsList([]));
   };
 
-  let getTopTen = () => {
+  const getTopTen = () => {
     axios.get("/top")
     .then(response => {
       setTopTen(response.data);
@@ -72,7 +71,7 @@ function App() {
     .catch(console.err);
   }
 
-  let mostPopularHandler = e => {
+  const mostPopularHandler = e => {
     e.preventDefault();
     getTopTen();
     hidePopular(false);
@@ -80,17 +79,16 @@ function App() {
     hideFavorites(true);
   };
 
-  let getFavoriteDogs = () => {
+  const getFavoriteDogs = () => {
     const ref = db.collection("users").doc(user.email);
-    ref.get()
-    .then((doc) => {
+    ref.get().then((doc) => {
       if (doc.exists) {
         setFavorites(doc.data().favorites);
       } 
     })
   };
 
-  let showFavorites = e => {
+  const showFavorites = e => {
     e.preventDefault();
     if (user != null) {
       getFavoriteDogs();

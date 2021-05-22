@@ -11,7 +11,6 @@ import Nav from './Nav';
 import Paginator from './Paginator';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import AuthAlert from './AuthAlert';
 
 function Alert(props) {
   return (<MuiAlert elevation={6} variant="filled" {...props} />);
@@ -47,7 +46,8 @@ const AuthenticatedApp = (props) => {
 	      mostPopularHandler={e => props.mostPopularHandler(e)} 
 	      showFavorites={props.showFavorites} />
 	      <MostSearched topTen={props.topTen} hidden={props.hiddenPopular}/>
-	      <Gallery auth={props.auth} data={props.dogs} page={props.page} perPage={props.perPage}
+	      <Gallery auth={props.auth} data={props.dogs} favorites={props.favorites}
+	       	page={props.page} perPage={props.perPage}
 	        hidden={props.hiddenGallery} />
 	      <FavoritesGallery auth={props.auth} data={props.favorites} page={props.page} perPage={props.perPage}
 	        hidden={props.hiddenFavorites} />
