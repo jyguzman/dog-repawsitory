@@ -11,10 +11,10 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 import {firebaseAuth} from '../provider/AuthProvider';
 import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import MultiAlert from '@material-ui/lab/Alert';
 
 function Alert(props) {
-  return (<MuiAlert elevation={6} variant="filled" {...props} />);
+  return (<MultiAlert elevation={6} variant="filled" {...props} />);
 }
 
 const UnauthenticatedApp = (props) => {

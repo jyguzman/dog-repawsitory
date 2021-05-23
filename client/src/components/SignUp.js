@@ -18,6 +18,11 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { Box } from "@material-ui/core";
+import MultiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return (<MultiAlert elevation={6} variant="filled" {...props} />);
+}
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -38,7 +43,7 @@ const SignUp = (props) => {
   	const [open, setOpen] = React.useState(false);
   	const [open2, setOpen2] = React.useState(true);
   	const [user, setUser] = React.useState(null);
-  	
+
 	React.useEffect(() => {
 	    firebase.auth().onAuthStateChanged((user) => {
 	      setUser(user);
@@ -61,8 +66,6 @@ const SignUp = (props) => {
 	    e.preventDefault();
 	    await handleSignup();
 	    setOpen2(true);
-	    //handleClose();
-	    //props.history.push('/');
 	  }
 
 	  const handleChange = event => {
@@ -141,22 +144,11 @@ const SignUp = (props) => {
 	      	</form>
 	      	<Box display={user == null ? "hidden" : "initial"}>
 		      	{errors.length > 0 ? 
-					<Snackbar anchorOrigin={{
-				          vertical: 'bottom',
-				          horizontal: 'left',
-				        }}
-				        message={errors[0]}
-	        			open={open2} 
-	        			 
-	        			onClose={handleClose2}
-				        action={
-				          <React.Fragment>
-				            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose2}>
-				              <CloseIcon fontSize="small" />
-				            </IconButton>
-				          </React.Fragment>}
-
-					/>: null}
+					<Snackbar open={open2} autoHideDuration={2500} onClose={handleClose2}>
+		        <Alert onClose={handleClose2} severity={"error"}>
+		        	{errors[0]}
+		        </Alert>
+      	  </Snackbar>: null}
 			</Box>
 		</Container>
 	);

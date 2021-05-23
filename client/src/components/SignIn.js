@@ -21,6 +21,11 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import MultiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return (<MultiAlert elevation={6} variant="filled" {...props} />);
+}
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -80,10 +85,7 @@ const SignIn = (props) => {
 	    event.preventDefault();
 	    
 	    await handleSignin();
-	    //props.history.push('/');
-	    //setOpen2(true);
-	    //handleClose2();
-	    	//handleClose();
+	    setOpen2(true);
 	}
 
 	  const handleChange = event => {
@@ -144,21 +146,11 @@ const SignIn = (props) => {
 	      	</form>
 	      	<Box display={(user == null) ? "hidden" : "initial"}>
 		      	{errors.length > 0 ? 
-					<Snackbar anchorOrigin={{
-				          vertical: 'bottom',
-				          horizontal: 'left',
-				        }}
-				        message={errors[0]}
-	        			open={open2} 
-	        			autoHideDuration={5000} 
-	        			onClose={handleClose2}
-				        action={
-				          <React.Fragment>
-				            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose2}>
-				              <CloseIcon fontSize="small" />
-				            </IconButton>
-				          </React.Fragment>}
-					/>: null}
+					<Snackbar open={open2} autoHideDuration={2500} onClose={handleClose2}>
+		        <Alert onClose={handleClose2} severity={"error"}>
+		        	{errors[0]}
+		        </Alert>
+      	  </Snackbar>: null}
 			</Box>
 		</Container>
 	);
