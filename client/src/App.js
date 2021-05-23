@@ -122,41 +122,8 @@ function App() {
                   hiddenGallery={hiddenGallery} hiddenPopular={hiddenPopular}
                   hiddenFavorites={hiddenFavorites}
                   dogs={dogs} favorites={favorites} page={page} perPage={perPage}
-                  handlePageChange={handlePageChange} />
-    
-  );
-  /*return (
-      <>
-        <Switch>
-          <Route exact path='/' 
-            render={() =>  
-              user == null ? 
-                <UnauthenticatedApp 
-                  auth={false}
-                  breedsList={breedsList} 
-                  submitHandler={submitHandler} setPage={setPage}
-                  mostPopularHandler={mostPopularHandler} topTen={topTen}
-                  hiddenGallery={hiddenGallery} hiddenPopular={hiddenPopular}
-                  dogs={dogs} page={page} perPage={perPage}
                   handlePageChange={handlePageChange} /> 
-                  : 
-                  <AuthenticatedApp 
-                  auth={true}
-                  breedsList={breedsList} 
-                  submitHandler={submitHandler} 
-                  showFavorites={showFavorites}
-                  setPage={setPage}
-                  mostPopularHandler={mostPopularHandler} topTen={topTen}
-                  hiddenGallery={hiddenGallery} hiddenPopular={hiddenPopular}
-                  hiddenFavorites={hiddenFavorites}
-                  dogs={dogs} favorites={favorites} page={page} perPage={perPage}
-                  handlePageChange={handlePageChange} />
-                }
-             />
-         
-        </Switch>
-      </>
-  );*/
+  );
 };
 
 export default App;
