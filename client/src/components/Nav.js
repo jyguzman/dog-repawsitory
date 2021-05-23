@@ -7,6 +7,7 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 import {firebaseAuth} from '../provider/AuthProvider';
 import Grid from '@material-ui/core/Grid';
+import firebase from 'firebase';
 
 const useStyles = makeStyles((theme) => ({
   nav: {
@@ -26,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
 const Nav = (props) => {
 	const classes = useStyles();
 	const {handleSignout} = useContext(firebaseAuth);
+	const [user, setUser] = React.useState(null);
+	React.useEffect(() => {
+	    firebase.auth().onAuthStateChanged((user) => {
+	      setUser(user);
+	    })
+  	}, user);
 
 	return (
 		<Container className={classes.nav}>
@@ -39,7 +46,7 @@ const Nav = (props) => {
 				</Grid>
 
 				<Grid item key={2}>
-					<Box display={props.auth ? "initial" : "none"}>
+					<Box display={user == null ? "none" : "initial"}>
 						<Button className={classes.button} variant="contained" color="primary" 
 							onClick={props.showFavorites}>
 							Favorite Dogs
@@ -47,20 +54,20 @@ const Nav = (props) => {
 					</Box>
 				</Grid>
 
-				<Box display={props.auth ? "none" : "initial"}>
+				<Box display={user == null ? "initial" : "none"}>
 				<Grid item key={3}>
-						<SignUp />
+						<SignUp  /> 
 				</Grid>
 				</Box>
 
-				<Box display={props.auth ? "none" : "initial"}>
+				<Box display={user == null ? "initial" : "none"}>
 				<Grid item key={4}>
-						<SignIn />
+						<SignIn  />
 				</Grid>
 				</Box>
 
 				<Grid item key={5}>
-					<Box display={props.auth ? "initial" : "none"}>
+					<Box display={user == null ? "none" : "initial"}>
 						<Button className={classes.button} variant="contained" color="primary" 
 							onClick={handleSignout}>
 							Sign Out

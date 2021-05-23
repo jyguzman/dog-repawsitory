@@ -59,6 +59,7 @@ export default function ModalImage(props) {
       }
     })
   }, []);
+
  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -100,8 +101,8 @@ export default function ModalImage(props) {
         } else {
           setAlreadySaved(true);
         }
-        
       })
+    .catch(err => console.log(err))
     };
 
   return (
@@ -128,9 +129,7 @@ export default function ModalImage(props) {
                     <IconButton className={classes.button} 
                       disabled={props.auth ? false : false} 
                       onClick={(event, url) => {saveImage(event, props.url); handleClick(event); }}>
-                      <FontAwesomeIcon icon={faHeart} size="2x"
-                         
-                        color="red"/>
+                      <FontAwesomeIcon icon={faHeart} size="2x" color="red"/>
                     </IconButton>
                     <Popover
                         id={id}

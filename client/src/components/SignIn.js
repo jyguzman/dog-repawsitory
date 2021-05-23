@@ -13,14 +13,14 @@ import firebase from 'firebase/app';
 import "firebase/auth";
 import {authMethods} from '../firebase/authmethods';
 import {firebaseAuth} from '../provider/AuthProvider';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import { Box } from "@material-ui/core";
 import Input from '@material-ui/core/Input';
-
-function Alert(props) {
-  return (<MuiAlert elevation={6} variant="filled" {...props} />);
-}
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -34,38 +34,57 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SignIn = () => {
+const SignIn = (props) => {
 	const classes = useStyles();
-	const {handleSignin, inputs, setInputs, errors} = React.useContext(firebaseAuth);
-
+	const {handleSignin, inputs, setInputs, errors, setErrors} = React.useContext(firebaseAuth);
+	const [isError, setIsError] = React.useState(false);
   	const [open, setOpen] = React.useState(false);
-  	const [alertOpen, setAlertOpen] = React.useState(false);
+  	const [open2, setOpen2] = React.useState(true);
 
+  	const [open3, setOpen3] = React.useState(false);
+
+  	const [user, setUser] = React.useState(null);
+	React.useEffect(() => {
+	    firebase.auth().onAuthStateChanged((user) => {
+	      setUser(user);
+	      setErrors([]);
+	    })
+  	}, []);
+	console.log(user + " " + SignIn.name);
+  const handleClick = () => {
+    setOpen3((prev) => !prev);
+  };
+
+  const handleClickAway = () => {
+    setOpen3(false);
+  };
 	  const handleClickOpen = () => {
 	    	setOpen(true);
 	  };
 
-	  const handleClose = (e) => {
-	    	setOpen(false);
-	  };
-
-	  const handleAlertOpen = () => {
-	  		setAlertOpen(true);
-	  }
-
-	  const handleAlertClose = (e, reason) => {
+	  const handleClose = (event, reason) => {
 	  	if (reason === 'clickaway') {
 	      return;
 	    }
-
-    	setAlertOpen(false);
+	    	setOpen(false);
 	  };
 
-	  const handleSubmit = async (e) => {
-	    e.preventDefault();
+	  const handleClose2 = (event, reason) => {
+	  	if (reason === 'clickaway') {
+	      return;
+	    }
+	    setOpen2(false);
+	  };
+
+    const handleSubmit = async (event) => {
+	    event.preventDefault();
+	    
 	    await handleSignin();
-	    setAlertOpen(errors.length > 0);
-	  }
+	    //props.history.push('/');
+	    //setOpen2(true);
+	    //handleClose2();
+	    	//handleClose();
+	}
 
 	  const handleChange = event => {
 	    const {name, value} = event.target;
@@ -87,6 +106,7 @@ const SignIn = () => {
 					       
 					    <Container className={classes.input}>
 					    	<TextField
+					    		noValidate 
 					            autoFocus
 					            margin="dense"
 					            id="email"
@@ -94,7 +114,7 @@ const SignIn = () => {
 					            type="email"
 					            fullWidth
 					            name="email"
-					            onChange={event => handleChange(event)}
+					            onChange={handleChange}
 					            value={inputs.email}
 					          />
 					          <TextField
@@ -105,30 +125,41 @@ const SignIn = () => {
 					            label="Password"
 					            type="password"
 					            fullWidth
-					            onChange={event => handleChange(event)}
+					            onChange={handleChange}
 					            value={inputs.password}
 					          />
 						  	
 				        </Container>
 				        </DialogContent>
 				        <DialogActions>
-				        	<Button color="primary" type="submit" onClick={e => {handleClose(e);}}>
-				        		Log In
-				        	</Button>
+					        	<Button color="primary" type="submit">
+					        		Log In
+					        	</Button>
 
-					        <Button onClick={e => handleClose(e)} color="primary">
+					        <Button onClick={handleClose} color="primary">
 					        	Cancel
 					        </Button>
 				        </DialogActions>
 		      	</Dialog>
 	      	</form>
-	      	
-				<Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleAlertClose}>
-			        <Alert onClose={handleAlertClose} severity="error">
-			          {errors[0]}
-			        </Alert>
-		      	</Snackbar>
-	      	
+	      	<Box display={(user == null) ? "hidden" : "initial"}>
+		      	{errors.length > 0 ? 
+					<Snackbar anchorOrigin={{
+				          vertical: 'bottom',
+				          horizontal: 'left',
+				        }}
+				        message={errors[0]}
+	        			open={open2} 
+	        			autoHideDuration={5000} 
+	        			onClose={handleClose2}
+				        action={
+				          <React.Fragment>
+				            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose2}>
+				              <CloseIcon fontSize="small" />
+				            </IconButton>
+				          </React.Fragment>}
+					/>: null}
+			</Box>
 		</Container>
 	);
 };

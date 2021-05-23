@@ -33,6 +33,7 @@ const AuthProvider = (props) => {
 	      		setInputs,
 	      		errors,
 	      		handleSignout,
+	      		setErrors
 		    }}>
 		      {props.children}
 

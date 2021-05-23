@@ -57,7 +57,7 @@ const AuthenticatedApp = (props) => {
 	        handlePageChange={props.handlePageChange} 
 	        isDisabled={props.hiddenGallery && props.hiddenFavorites}
 	      />
-	      <Snackbar open={alertOpen} autoHideDuration={3000} onClose={handleAlertClose}>
+	      <Snackbar open={alertOpen} autoHideDuration={2500} onClose={handleAlertClose}>
 		        <Alert onClose={handleAlertClose} severity={"success"}>
 		          {authType === "signup" ? "Successfully signed up!" : "Successfully logged in!"}
 		        </Alert>

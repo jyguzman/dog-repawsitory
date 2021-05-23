@@ -19,7 +19,7 @@ function Alert(props) {
 
 const UnauthenticatedApp = (props) => {
 	const [alertOpen, setAlertOpen] = React.useState(true);
-	const {handleSignout, authType} = useContext(firebaseAuth);
+	const {handleSignout, authType, errors} = useContext(firebaseAuth);
 
 	const handleAlertClose = (event, reason) => {
 	    if (reason === 'clickaway') {
@@ -49,11 +49,11 @@ const UnauthenticatedApp = (props) => {
 	      <Paginator pages={Math.ceil(props.dogs.length/props.perPage)} page={props.page}
 	        handlePageChange={props.handlePageChange} isDisabled={props.hiddenGallery}
 	      />
-	      {authType === "signout" ? <Snackbar open={alertOpen} autoHideDuration={3000} onClose={handleAlertClose}>
+	      {authType === "signout" ? <Snackbar open={alertOpen} autoHideDuration={2500} onClose={handleAlertClose}>
 		        <Alert onClose={handleAlertClose} severity={"success"}>
 		        	You have been signed out.
 		        </Alert>
-      	  </Snackbar> : null}
+      	  </Snackbar> : null }
 	    </Container>   
   );
 };

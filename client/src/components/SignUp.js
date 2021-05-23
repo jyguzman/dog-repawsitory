@@ -15,7 +15,9 @@ import {authMethods} from '../firebase/authmethods';
 import {firebaseAuth} from '../provider/AuthProvider';
 import {withRouter} from 'react-router-dom';
 import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -31,10 +33,18 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = (props) => {
 	const classes = useStyles();
-	const {handleSignup, inputs, setInputs, errors} = React.useContext(firebaseAuth);
+	const {handleSignup, inputs, setInputs, errors, setErrors} = React.useContext(firebaseAuth);
 	const [pass2, setPass2] = useState("");
   	const [open, setOpen] = React.useState(false);
-
+  	const [open2, setOpen2] = React.useState(true);
+  	const [user, setUser] = React.useState(null);
+  	
+	React.useEffect(() => {
+	    firebase.auth().onAuthStateChanged((user) => {
+	      setUser(user);
+	      setErrors([]);
+	    })
+  	}, []);
 	  const handleClickOpen = () => {
 	    	setOpen(true);
 	  };
@@ -43,10 +53,16 @@ const SignUp = (props) => {
 	    	setOpen(false);
 	  };
 
+	  const handleClose2 = (e) => {
+	    	setOpen2(false);
+	  };
+
 	  const handleSubmit = async (e) => {
 	    e.preventDefault();
 	    await handleSignup();
-	    props.history.push('/');
+	    setOpen2(true);
+	    //handleClose();
+	    //props.history.push('/');
 	  }
 
 	  const handleChange = event => {
@@ -69,6 +85,7 @@ const SignUp = (props) => {
 				          
 					  <Container className={classes.input}>
 					    	<TextField
+					    		noValidate 
 					            autoFocus
 					            margin="dense"
 					            id="email"
@@ -87,7 +104,7 @@ const SignUp = (props) => {
 					            label="Password"
 					            type="password"
 					            fullWidth
-					            onChange={event => handleChange(event)}
+					            onChange={handleChange}
 					            value={inputs.password}
 					          />
 					          <TextField
@@ -104,7 +121,6 @@ const SignUp = (props) => {
 					            	? "Passwords must match." : ""}
 					            error={pass2 === "" || pass2 !== inputs.password} 
 					          />
-						  	
 				        </Container>
 					  
 			        </DialogContent>
@@ -112,17 +128,36 @@ const SignUp = (props) => {
 			        	<Button color="primary" 
 			        		type="submit" 
 			        		disabled={pass2 === "" || pass2 !== inputs.password}
-			        		onClick={e => handleClose(e)}>
+			        		>
+			        		
 			        		Sign Up
 			        	</Button>
 
-				        <Button onClick={e => handleClose(e)} color="primary">
+				        <Button onClick={handleClose} color="primary">
 				        	Cancel
 				        </Button>
 			        </DialogActions>
 		      	</Dialog>
 	      	</form>
-	      	
+	      	<Box display={user == null ? "hidden" : "initial"}>
+		      	{errors.length > 0 ? 
+					<Snackbar anchorOrigin={{
+				          vertical: 'bottom',
+				          horizontal: 'left',
+				        }}
+				        message={errors[0]}
+	        			open={open2} 
+	        			 
+	        			onClose={handleClose2}
+				        action={
+				          <React.Fragment>
+				            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose2}>
+				              <CloseIcon fontSize="small" />
+				            </IconButton>
+				          </React.Fragment>}
+
+					/>: null}
+			</Box>
 		</Container>
 	);
 };
