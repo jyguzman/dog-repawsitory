@@ -19,7 +19,7 @@ const FavoritesGallery = props => {
 				        .slice((page - 1) * perPage, page * perPage)
 				        .map((dog, index) => {
 				            return (
-				            	<Grid item key={index} xs={4}>
+				            	<Grid item key={index} xs={6} sm={6} md={4} lg={4} xl={4}>
 				            			<ModalImage auth={false}
 						            		url={dog} title={"dog"} key={index+1} />   		
 						        </Grid>
