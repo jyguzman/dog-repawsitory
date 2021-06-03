@@ -28,24 +28,6 @@ const Nav = (props) => {
 	const classes = useStyles();
 	const {handleSignout} = useContext(firebaseAuth);
 	const [user, setUser] = React.useState(null);
-	const [openLogIn, setOpenLogIn] = useState(false);
-	const [openSignUp, setOpenSignUp] = useState(false);
-
-	const openSignin = () => {
-		setOpenLogIn(true);
-	};
-
-	const closeSignin = () => {
-		setOpenLogIn(false);
-	}
-
-	const openSignup = () => {
-		setOpenSignUp(true);
-	};
-
-	const closeSignUp = () => {
-		setOpenSignUp(false);
-	}
 
 	React.useEffect(() => {
 	    firebase.auth().onAuthStateChanged((user) => {
@@ -56,7 +38,7 @@ const Nav = (props) => {
 	return (
 		
 		<Container className={classes.nav}>
-			<Grid container direction="row" justify="space-around" alignItems="center" spacing={3}>
+			<Grid container direction="row" justify="center" alignItems="center" spacing={3}>
 				<Grid item key={1}>
 					<Button variant="contained" color="primary" 
 						onClick={props.mostPopularHandler}>
@@ -65,7 +47,7 @@ const Nav = (props) => {
 				</Grid>
 
 				{
-					user != null ? 
+						user != null ? 
 						<Grid item key={2}>
 							<Button className={classes.button} variant="contained" color="primary" 
 								onClick={props.showFavorites}>
@@ -74,38 +56,6 @@ const Nav = (props) => {
 						</Grid> : null
 				}
 
-				{
-					user == null ? 
-					<Grid item key={3}>
-						<Button className={classes.button} variant="contained" color="primary" 
-							onClick={openSignup}>
-							Sign Up
-						</Button>
-						<SignUp open={openSignUp} closeSignUp={closeSignUp}/>	
-					</Grid> : null
-				}
-
-				{
-					user == null ? 
-					<Grid item key={4}>
-						<Button className={classes.button} variant="contained" color="primary" 
-							onClick={openSignin}>
-							Log In
-						</Button>
-						<SignIn  open={openLogIn} closeSignIn={closeSignin}/> 		
-					</Grid> : null
-				}
-
-				{
-					user != null ? 
-					<Grid item key={5}>
-						<Button className={classes.button} variant="contained" color="primary" 
-							onClick={handleSignout}>
-							Sign Out
-						</Button>
-					</Grid> : null
-				}
-				
 			</Grid>
 		</Container>
 	);

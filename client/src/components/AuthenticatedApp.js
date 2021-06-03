@@ -34,7 +34,7 @@ const AuthenticatedApp = (props) => {
 	return (
 		
 	    <Container maxWidth="lg">
-			<Header />
+			<Header showFavorites={props.showFavorites}/>
 			
 	        <div className="search-bar">
 	          <BreedList 
