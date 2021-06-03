@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Header from './Header';
 import Gallery from './Gallery';
+import Grid from '@material-ui/core/Grid';
 import BreedList from './BreedList';
 import MostSearched from './MostSearched';
 import Nav from './Nav';

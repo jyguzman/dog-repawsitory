@@ -51,11 +51,11 @@ const SignUp = (props) => {
 	    })
   	}, []);
 	  const handleClickOpen = () => {
-	    	setOpen(true);
+	    	//setOpen(true);
 	  };
 
 	  const handleClose = (e) => {
-	    	setOpen(false);
+	    	//setOpen(false);
 	  };
 
 	  const handleClose2 = (e) => {
@@ -75,11 +75,8 @@ const SignUp = (props) => {
 
 	return ( 
 		<Container className={classes.container}>
-			<Button variant="contained" color="primary" onClick={handleClickOpen}>
-		        Sign Up
-		    </Button>
 		    <form onSubmit={handleSubmit}>
-				<Dialog disablePortal open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+				<Dialog disablePortal open={props.open} onClose={props.closeSignUp} aria-labelledby="form-dialog-title">
 		        	<DialogTitle id="form-dialog-title">Sign Up</DialogTitle>
 			        <DialogContent>
 			          <DialogContentText>
@@ -136,7 +133,7 @@ const SignUp = (props) => {
 			        		Sign Up
 			        	</Button>
 
-				        <Button onClick={handleClose} color="primary">
+				        <Button onClick={props.closeSignUp} color="primary">
 				        	Cancel
 				        </Button>
 			        </DialogActions>

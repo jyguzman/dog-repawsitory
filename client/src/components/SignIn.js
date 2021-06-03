@@ -43,7 +43,7 @@ const SignIn = (props) => {
 	const classes = useStyles();
 	const {handleSignin, inputs, setInputs, errors, setErrors} = React.useContext(firebaseAuth);
 	const [isError, setIsError] = React.useState(false);
-  	const [open, setOpen] = React.useState(false);
+  	//const [open, setOpen] = React.useState(props.open);
   	const [open2, setOpen2] = React.useState(true);
 
   	const [open3, setOpen3] = React.useState(false);
@@ -63,16 +63,6 @@ const SignIn = (props) => {
   const handleClickAway = () => {
     setOpen3(false);
   };
-	  const handleClickOpen = () => {
-	    	setOpen(true);
-	  };
-
-	  const handleClose = (event, reason) => {
-	  	if (reason === 'clickaway') {
-	      return;
-	    }
-	    	setOpen(false);
-	  };
 
 	  const handleClose2 = (event, reason) => {
 	  	if (reason === 'clickaway') {
@@ -95,11 +85,8 @@ const SignIn = (props) => {
 
 	return ( 
 		<Container className={classes.container}>
-			<Button variant="contained" color="primary" onClick={handleClickOpen}>
-		        Log In
-		    </Button>
 		    <form onSubmit={handleSubmit}>
-				<Dialog disablePortal open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+				<Dialog disablePortal open={props.open} onClose={props.closeSignIn} aria-labelledby="form-dialog-title">
 			        	<DialogTitle id="form-dialog-title">Log In</DialogTitle>
 				        <DialogContent>
 				          <DialogContentText>
@@ -138,7 +125,7 @@ const SignIn = (props) => {
 					        		Log In
 					        	</Button>
 
-					        <Button onClick={handleClose} color="primary">
+					        <Button onClick={props.closeSignIn} color="primary">
 					        	Cancel
 					        </Button>
 				        </DialogActions>
