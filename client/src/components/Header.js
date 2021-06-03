@@ -91,7 +91,7 @@ const Header = (props) => {
 				</Toolbar>
 			</AppBar>
 			<Grid item container direction="column" className="color">	
-					<p>Search for pictures of dogs by breed!<br></br>Sign up or log in to save your favorites.</p>
+					<h4>Search for pictures of dogs by breed!<br></br>Sign up or log in to save your favorites.</h4>
 					<img className = "headerImg" src={"dog.jpg"} alt="Dog"/>
 			</Grid>
 		</Container>
