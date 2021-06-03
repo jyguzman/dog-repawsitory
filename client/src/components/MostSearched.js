@@ -38,7 +38,7 @@ const MostSearched = props => {
 				        {topTen
 				          .map((dog, index) => {
 				            return (
-				            	<Grid item key={index} xs={4}>
+								<Grid item key={index} xs={10} sm={6} md={4} lg={3} xl={3}>
 					              <Card >
 					              	<CardMedia
 					              		className={classes.media}
