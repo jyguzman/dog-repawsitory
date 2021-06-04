@@ -20,7 +20,7 @@ export default function BreedList(props) {
       onChange={props.submitHandler}
       style={{ width: 300 }}
       renderInput={(params) => <TextField {...params} 
-          label="Search breeds." variant="outlined" />}
+          label="Search breeds" variant="outlined" />}
     />
   );
 }

@@ -49,8 +49,8 @@ const MostSearched = props => {
 					              	<Grid container justify="center">
 						              	<CardContent>
 						              		<Typography gutterBottom 
-						              			variant="h6" component="h6">
-		            							{dog.breed}
+						              			variant="subtitle1" component="h6">
+		            							{dog.breed}: {dog.searches} searches
 		          							</Typography>
 						              	</CardContent>
 					              	</Grid>
