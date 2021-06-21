@@ -11,14 +11,12 @@ import firebase from 'firebase';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-	  flexGrow: 1
+	  flexGrow: 1,
+		marginTop: "25px"
 	},
 	title: {
 	  flexGrow: 1
 	},
-	text: {
-		overflowWrap: "break-word",
-	}
   }));
 
 const Header = (props) => {
@@ -51,7 +49,7 @@ const Header = (props) => {
   	}, user);
 
 	return (
-		<Container>
+		<Container className={classes.root}>
 			<AppBar>
 				<Toolbar>
 					<Typography variant="h6" className={classes.title}>
