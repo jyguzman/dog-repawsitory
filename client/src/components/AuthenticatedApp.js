@@ -37,7 +37,7 @@ const AuthenticatedApp = (props) => {
 	    <Container maxWidth="lg">
 			<Header showFavorites={props.showFavorites}/>
 			<Greeting />
-	        <Container className="search-bar">
+	        <div className="search-bar">
 	          <BreedList 
 	          breedOptions={props.breedsList}
 	          submitHandler={(event, searchTerm) => { 
@@ -45,7 +45,7 @@ const AuthenticatedApp = (props) => {
 	              props.submitHandler(event, searchTerm.breed); 
 	            props.setPage(1); 
 	          }}/>
-	        </Container>
+	        </div>
 
 	      <Nav auth={props.auth} 
 	      mostPopularHandler={e => props.mostPopularHandler(e)} 
