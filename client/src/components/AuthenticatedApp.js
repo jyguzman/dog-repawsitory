@@ -8,6 +8,7 @@ import Gallery from './Gallery';
 import FavoritesGallery from './FavoritesGallery';
 import BreedList from './BreedList';
 import MostSearched from './MostSearched';
+import Greeting from './Greeting';
 
 import Nav from './Nav';
 import Paginator from './Paginator';
@@ -35,8 +36,8 @@ const AuthenticatedApp = (props) => {
 		
 	    <Container maxWidth="lg">
 			<Header showFavorites={props.showFavorites}/>
-			
-	        <div className="search-bar">
+			<Greeting />
+	        <Container className="search-bar">
 	          <BreedList 
 	          breedOptions={props.breedsList}
 	          submitHandler={(event, searchTerm) => { 
@@ -44,7 +45,7 @@ const AuthenticatedApp = (props) => {
 	              props.submitHandler(event, searchTerm.breed); 
 	            props.setPage(1); 
 	          }}/>
-	        </div>
+	        </Container>
 
 	      <Nav auth={props.auth} 
 	      mostPopularHandler={e => props.mostPopularHandler(e)} 

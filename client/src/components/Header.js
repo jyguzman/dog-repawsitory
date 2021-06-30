@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import {firebaseAuth} from '../provider/AuthProvider';
 import Container from '@material-ui/core/Container';
-import { makeStyles, Grid, Button } from '@material-ui/core';
+import { makeStyles, Grid, Button, Paper, CardMedia } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -17,7 +17,11 @@ const useStyles = makeStyles((theme) => ({
 	title: {
 	  flexGrow: 1
 	},
-  }));
+	media: {
+		maxHeight: 500,
+		maxWidth: 500
+	}
+}));
 
 const Header = (props) => {
 	const classes = useStyles();
@@ -87,11 +91,7 @@ const Header = (props) => {
 						</Grid> : null
 					}
 				</Toolbar>
-			</AppBar>
-			<Grid item container direction="column" className="color">	
-					<h4>Search for pictures of dogs by breed!<br></br>Sign up or log in to save your favorites.</h4>
-					<img className = "headerImg" src={"dog.jpg"} alt="Dog"/>
-			</Grid>
+			</AppBar>			
 		</Container>
 		
 	);

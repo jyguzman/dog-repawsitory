@@ -5,14 +5,47 @@ import App from './App';
 import AuthProvider from './provider/AuthProvider'
 import {BrowserRouter} from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
+
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
 require('dotenv').config();
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Nexa',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif'
+    ].join(','),
+  },
+  overrides: {
+    MuiAccordion: {
+      root: {
+        "&::before": {
+          display: "none"
+        }
+      }
+    },
+    MuiAccordionSummary: {
+      content: {
+        textAlign: "right"
+      }
+    }
+  }
+});
+
 ReactDOM.render(
   <React.StrictMode>
-	  <BrowserRouter>
-	  	<AuthProvider>
-	    	<App />
-	    </AuthProvider>
-	  </BrowserRouter>
+	  <ThemeProvider theme={theme}>
+		<BrowserRouter>
+			<AuthProvider>
+				<App />
+			</AuthProvider>
+		</BrowserRouter>
+	  </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

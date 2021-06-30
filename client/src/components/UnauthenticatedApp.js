@@ -10,6 +10,7 @@ import Nav from './Nav';
 import Paginator from './Paginator';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
+import Greeting from './Greeting';
 import {firebaseAuth} from '../provider/AuthProvider';
 import Snackbar from '@material-ui/core/Snackbar';
 import MultiAlert from '@material-ui/lab/Alert';
@@ -33,6 +34,7 @@ const UnauthenticatedApp = (props) => {
 	return (
 	    <Container>
 	        <Header />
+			<Greeting />
 	        <div className="search-bar">
 	          <BreedList 
 	          breedOptions={props.breedsList}
