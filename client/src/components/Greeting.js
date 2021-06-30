@@ -10,23 +10,22 @@ const useStyles = makeStyles((theme) => ({
 	  flexGrow: 1
 	},
 	media: {
-		maxHeight: 400,
-		maxWidth: 400,
+		maxHeight: 350,
+		maxWidth: 350,
         borderRadius: "15px",
         border: "black solid"
 	},
     greeting: {
-        marginTop: "75px",
+        marginTop: "50px",
         padding: "15px",
-        borderRadius: "15px",
+        //borderRadius: "15px",
     }
 }));
 
 const Greeting = () => {
     const classes = useStyles();
     return (
-        <Paper elevation={4} className={classes.greeting}>
-				<Grid item container direction="column" justify="center" alignItems="center" spacing={2} >
+				<Grid className={classes.greeting} item container direction="column" justify="center" alignItems="center" spacing={2} >
                     <Grid item>
                         <Typography>
                             Search for images of your favorite breeds! <br></br> Sign up or log in to save your favorites.
@@ -39,7 +38,6 @@ const Greeting = () => {
 							/>
 						</Grid>
 				</Grid>
-		</Paper>
     );
 };
 
