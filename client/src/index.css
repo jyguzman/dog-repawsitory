@@ -63,8 +63,8 @@ body {
 
 .dogs img {
 	border-radius: 20px;
-	height: 150px;
-	width: 150px;
+	max-height: 300px;
+	max-width: 300px;
 	padding: 10px;
 	padding-top: 15px;
 	border-color: black;
@@ -73,7 +73,8 @@ body {
 
 @media only screen and (max-width: 600px) {
   .dogs img {
-    max-width: 100%;
+    max-height: 100%;
+	max-width: 150px
   }
 }
 
@@ -81,6 +82,8 @@ body {
 	display: flex;
 	justify-content: center;
 	cursor: pointer;
+	max-width: 400px;
+	max-height: 400px;
 }
 
 .dog-img {
